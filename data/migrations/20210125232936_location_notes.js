@@ -6,7 +6,7 @@ exports.up = function(knex) {
       tbl.string('user_id')
       .notNullable()
       .unsigned()
-      .references('users.id')
+      .references('profiles.id')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
       tbl.integer('location_id')

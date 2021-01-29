@@ -3,7 +3,7 @@ exports.up = function(knex) {
   return knex.schema
 
   .createTable('user_locations',tbl=>{
-      tbl.integer('userid')
+      tbl.string('userid')
       .notNullable()
       .unsigned()
       .references('profiles.id')
