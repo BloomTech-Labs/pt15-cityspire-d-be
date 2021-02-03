@@ -6,6 +6,14 @@ exports.up = (knex) => {
       table.string('email');
       table.string('name');
       table.string('avatarUrl');
+      table.string('address1');
+      table.string('address2');
+      table.string('city');
+      table.string('state');
+      table.string('zip');
+      table.string('phone');
+      table.string('image');
+
       table.timestamps(true, true);
     });
 };
