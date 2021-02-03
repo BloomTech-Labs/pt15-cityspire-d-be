@@ -14,8 +14,9 @@ exports.up = function (knex) {
       .references('locations.id')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
-    tbl.primary(['userid','locationid']);
-  })
+
+    tbl.primary(['userid', 'locationid']);
+  });
 };
 
 exports.down = function (knex) {
