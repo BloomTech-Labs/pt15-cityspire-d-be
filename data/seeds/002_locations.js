@@ -10,18 +10,21 @@ exports.seed = function (knex) {
           lat: '43.65',
           lon: '79.38',
           population: 2930000,
+          refid: '1',
         },
         {
           id: 2,
           lat: '29.42',
           lon: '98.49',
           population: 1508000,
+          refid: '2',
         },
         {
           id: 3,
           lat: '33.74',
           lon: '84.38',
           population: 488800,
+          refid: '3',
         },
       ]);
     });

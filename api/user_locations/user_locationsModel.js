@@ -1,3 +1,5 @@
+//const Knex = require('knex');
+//const knexfile = require('../../config/knexfile');
 const dbConfig = require('../../data/db-config');
 const db = require('../../data/db-config');
 
@@ -10,12 +12,15 @@ const findById = async (id) => {
 };
 
 const findLocationsById = async (id) => {
-  return db('profiles as p')
+  return db('locations as l')
+    .join('profiles as p', 'p.id', 'l.refid')
     .where('p.id', id)
-    .join('locations as l', 'l.id', 'p.id')
-
-    .select('l.*');
+    .select('p.*', 'l.lat');
 };
+
+// const findLocationsById = async (id) => {
+//   return db('user_locations').select('*').from('locations').joinRaw('natural full join profiles').where('id',id)
+// }
 
 module.exports = {
   find,
