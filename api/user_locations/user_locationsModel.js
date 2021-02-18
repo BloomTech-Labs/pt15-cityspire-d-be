@@ -13,24 +13,11 @@ const findById = async (id) => {
 };
 
 const findLocationsById = async ({ id }) => {
-  return (
-    db('locations')
-      // .join('profiles as p', 'p.id', 'l.id')
-      // .where('p.id', id)
-      // .select('l.*')
-
-      // .whereIn('id', 'user_locations')
-      // .select('id')
-      // .where('userid', id)
-      .innerJoin(
-        'user_locations',
-        'locations.refid',
-        'user_locations.locationid'
-      )
-      .innerJoin('profiles', 'profiles.id', 'user_locations.userid')
-      .where('profiles.id', id)
-      .select('locations.*')
-  );
+  return db('locations')
+    .innerJoin('user_locations', 'locations.refid', 'user_locations.locationid')
+    .innerJoin('profiles', 'profiles.id', 'user_locations.userid')
+    .where('profiles.id', id)
+    .select('locations.*');
 };
 
 // const findLocationsById = async (id) => {
