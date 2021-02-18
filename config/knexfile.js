@@ -2,19 +2,17 @@ var dotenv = require('dotenv');
 
 dotenv.config({ path: '../.env' });
 
-/** 
-pg.defaults.ssl = {
-  rejectUnauthorized: false
-}*/
+if (process.env.NODE_ENV) {
+  var pg = require('pg');
+  pg.defaults.ssl = {
+    rejectUnauthorized: false,
+  };
+}
 
 module.exports = {
   development: {
     client: 'pg',
     connection: process.env.DATABASE_URL,
-    /** 
-    ssl: {
-      rejectUnauthorized: false
-    },*/
     migrations: { directory: '../data/migrations' },
     seeds: { directory: '../data/seeds' },
     pool: {

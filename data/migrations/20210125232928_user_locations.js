@@ -8,10 +8,10 @@ exports.up = function (knex) {
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
     tbl
-      .integer('locationid')
+      .string('locationid')
       .notNullable()
       .unsigned()
-      .references('locations.id')
+      .references('locations.refid')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
