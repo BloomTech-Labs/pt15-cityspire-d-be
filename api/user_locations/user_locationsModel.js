@@ -9,7 +9,7 @@ const find = async () => {
 };
 
 const findById = async (id) => {
-  return db('user_locations').where('userid', id).select('*');
+  return db('user_locations').where('userid', id);
 };
 
 const findLocationsById = async ({ id }) => {
