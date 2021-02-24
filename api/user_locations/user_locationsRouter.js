@@ -1,5 +1,5 @@
 const express = require('express');
-
+const axios = require('axios')
 const userLocs = require('./user_locationsModel.js');
 //const locs = require('../locations/locationsModel.js');
 const router = express.Router();
@@ -42,16 +42,32 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const locid = [];
+  let locArray = [];
+ 
   userLocs
     .findById(req.params.id)
     .then((userLocs) => {
-      let data = res
-      console.log(data)
+      let data = userLocs
+      //console.log(data)
       for (let i = 0; i < data.length; i++) {
         locid.push(parseInt(data[i].locationid));
       }
-      console.log(locid);
+      axios
+      .get('http://cityspire-d-ds-01.eba-5qfhebrw.us-east-1.elasticbeanstalk.com/cities/')
+      .then((response)=>{
+        locArray = response.data
+        //console.log(locArray)
+      })
+      .then(()=>{
+        console.log(locid);
+      var filteredData = locArray.filter(item => locid.includes(item.id))
+      //console.log(filteredData)
+      res.status(200).json(filteredData)
+      })
+       
+      
     })
+    
 
     .catch((err) => {
       res.status(500).json({ message: err });
@@ -59,6 +75,19 @@ router.get('/:id', (req, res) => {
 });
 
 /*******************POSTS*********************** */
+
+  router.post('/:id',(req,res)=>{
+    const {id} = req.params
+    const locid = req.body.locationid
+
+    userLocs.add(locid,id)
+    .then(()=>{
+      res.status(201).json({message: 'User location added'})
+    })
+    .catch(err=>{
+      res.status(500).json({message:err})
+    })
+  })
 
 module.exports = router;
 

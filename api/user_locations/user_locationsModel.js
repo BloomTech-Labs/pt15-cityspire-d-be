@@ -20,6 +20,18 @@ const findLocationsById = async ({ id }) => {
     .select('locations.*');
 };
 
+ async function add(locid,userid){
+   try{
+    return db('user_locations')
+    .where('userid',userid)
+    .insert('user_locations',locid)
+   }
+   catch(error){
+    throw(error)
+   }
+ }
+  
+
 // const findLocationsById = async (id) => {
 //   return db('user_locations').select('*').from('locations').joinRaw('natural full join profiles').where('id',id)
 // }
@@ -28,4 +40,5 @@ module.exports = {
   find,
   findById,
   findLocationsById,
+  add
 };
