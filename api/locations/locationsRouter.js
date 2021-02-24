@@ -53,7 +53,6 @@ router.get('/:id', (req, res) => {
     .catch((err) => {
       res.status(500).json({ message: 'Error fetching API', error: err });
     });
-    
 });
 
 // router.get('/all',(req,res)=>{
