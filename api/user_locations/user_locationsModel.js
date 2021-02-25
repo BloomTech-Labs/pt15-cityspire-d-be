@@ -9,7 +9,7 @@ const find = async () => {
 };
 
 const findById = async (id) => {
-  return db('user_locations').where('userid', id).select('*');
+  return db('user_locations').where('userid', id);
 };
 
 const findLocationsById = async ({ id }) => {
@@ -20,6 +20,15 @@ const findLocationsById = async ({ id }) => {
     .select('locations.*');
 };
 
+async function add(locid) {
+  const [id] = await db('user_locations').insert(locid, 'id');
+  return findById(id);
+}
+
+function remove(id) {
+  return db('user_locations').where('id', id).del();
+}
+
 // const findLocationsById = async (id) => {
 //   return db('user_locations').select('*').from('locations').joinRaw('natural full join profiles').where('id',id)
 // }
@@ -28,4 +37,6 @@ module.exports = {
   find,
   findById,
   findLocationsById,
+  add,
+  remove,
 };
